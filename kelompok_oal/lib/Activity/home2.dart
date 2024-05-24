@@ -147,59 +147,25 @@ class _MyHome2State extends State<MyHome2> {
       drawer: Drawer(
         child: Column(
           children: [
-            Container(
-              color: Colors.blue,
-              width: double.infinity,
-              padding: const EdgeInsets.only(top: 50),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyProfile()));
-                    },
-                    child: Stack(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 15),
-                          height: 90,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/profile.jpeg'),
-                            ),
+            GestureDetector(
+              child: UserAccountsDrawerHeader(
+                accountName: Text("Ferdinan"),
+                accountEmail: Text("ferdinantag8@gmail.com"),
+                currentAccountPicture: CircleAvatar(
+                    child: Container(
+                        height: 90,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/profile.jpeg'),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 70, left: 148),
-                              child: Icon(
-                                Icons.edit,
-                                size: 50,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Text(
-                        'Ferdinan',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ),
-                  ),
-                ],
+                        ))),
+                decoration: BoxDecoration(color: Colors.blue),
               ),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyProfile()));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.home_filled),
@@ -227,7 +193,7 @@ class _MyHome2State extends State<MyHome2> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.menu_book_sharp),
+              leading: const Icon(Icons.local_activity),
               title: const Text('Aktivity'),
               onTap: () {
                 Navigator.push(
@@ -284,7 +250,6 @@ class _MyHome2State extends State<MyHome2> {
             child: Row(
               children: [
                 DropdownButton(
-                  // dropdownColor: Colors.blue[50],
                   value: selectedDDB,
                   hint: const Text("Product"),
                   items: const [

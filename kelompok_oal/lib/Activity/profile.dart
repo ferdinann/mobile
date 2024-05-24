@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kelompok_oal/Activity/course.dart';
 import 'package:kelompok_oal/Activity/home.dart';
+import 'package:kelompok_oal/Activity/myButton.dart';
 import 'package:kelompok_oal/Activity/test.dart';
 import 'package:kelompok_oal/provider/Switch.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +54,7 @@ class _MyProfileState extends State<MyProfile> {
                 ),
               ],
             ),
-            MyProfileData()
+            const MyProfileData()
           ],
         ));
   }
@@ -191,128 +191,64 @@ class _MyProgressState extends State<MyProgress>
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   tabController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     var DarkMode = Provider.of<Mode>(context);
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 315,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: TabBar(
-                            tabs: [
-                              Tab(
-                                text: 'Course Progress',
-                              ),
-                              Tab(
-                                text: 'Course Completed',
-                              )
-                            ],
-                            unselectedLabelColor: DarkMode.enableDarkMode
-                                ? Colors.white
-                                : Colors.black,
-                            labelColor: Colors.blue,
-                            indicatorColor: Colors.blue,
-                            indicatorWeight: 2,
-                            controller: tabController,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Expanded(
-                  child: TabBarView(
-                controller: tabController,
-                children: [MyCourseProgres(), MyCourseCompleted()],
-              ))
-            ],
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 315,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TabBar(
+                          tabs: const [
+                            Tab(
+                              text: 'Course Progress',
+                            ),
+                            Tab(
+                              text: 'Course Completed',
+                            )
+                          ],
+                          unselectedLabelColor: DarkMode.enableDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                          labelColor: Colors.blue,
+                          indicatorColor: Colors.blue,
+                          indicatorWeight: 2,
+                          controller: tabController,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Expanded(
+                child: TabBarView(
+              controller: tabController,
+              children: const [MyCourseProgres(), MyCourseCompleted()],
+            ))
+          ],
         ),
       ),
     );
   }
 }
-
-// class MyProgress extends StatefulWidget {
-//   const MyProgress({super.key});
-
-//   @override
-//   State<MyProgress> createState() => _MyProgressState();
-// }
-
-// class _MyProgressState extends State<MyProgress>
-//     with SingleTickerProviderStateMixin {
-//   late TabController tabController;
-
-//   @override
-//   void initState() {
-//     tabController = TabController(length: 2, vsync: this);
-//     super.initState();
-//   }
-
-//   // @override
-//   // void dispose() {
-//   //   tabController.dispose();
-//   //   super.dispose();
-//   // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var darkMode = Provider.of<Mode>(context);
-
-//     return Scaffold(
-//       body: CustomScrollView(
-//         slivers: [
-//           SliverAppBar(
-//             pinned: false,
-//             floating: false,
-//             bottom: TabBar(
-//               tabs: [
-//                 Tab(
-//                   text: 'Course Progress',
-//                 ),
-//                 Tab(
-//                   text: 'Course Completed',
-//                 )
-//               ],
-//               unselectedLabelColor:
-//                   darkMode.enableDarkMode ? Colors.white : Colors.black,
-//               labelColor: Colors.blue,
-//               indicatorColor: Colors.blue,
-//               indicatorWeight: 2,
-//               controller: tabController,
-//             ),
-//           ),
-//           SliverFillRemaining(
-//             child: TabBarView(
-//               controller: tabController,
-//               children: [MyCourseProgres(), MyCourseCompleted()],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class MyCourseProgres extends StatefulWidget {
   const MyCourseProgres({super.key});
@@ -435,8 +371,7 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       InkWell(
         onTap: () {
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => MyTest()));
+          _showMyButtonSheet(context);
         },
         child: Stack(
           children: [
@@ -496,8 +431,7 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
       ),
       GestureDetector(
         onTap: () {
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => MyTest()));
+          _showMyButtonSheet(context);
         },
         child: Stack(
           children: [
@@ -556,6 +490,10 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
       ),
     ]);
   }
+
+  void _showMyButtonSheet(BuildContext context) {
+    showModalBottomSheet(context: context, builder: (context) => MyButton());
+  }
 }
 
 class MyProfileTab extends StatefulWidget {
@@ -607,7 +545,7 @@ class _MyProfileTabState extends State<MyProfileTab> {
                 ),
               ],
             ),
-            MyCourse()
+            MyProgress()
           ],
         ));
   }
