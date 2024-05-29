@@ -7,14 +7,6 @@ import 'package:kelompok_oal/Activity/elearning.dart';
 import 'package:kelompok_oal/Activity/profile.dart';
 import 'package:kelompok_oal/provider/Switch.dart';
 import 'package:kelompok_oal/provider/obscure.dart';
-import 'package:tugas_kelompok/Activity/aboutus.dart';
-import 'package:tugas_kelompok/Activity/community.dart';
-import 'package:tugas_kelompok/Activity/course.dart';
-import 'package:tugas_kelompok/Activity/dropDown.dart';
-import 'package:tugas_kelompok/Activity/elearning.dart';
-import 'package:tugas_kelompok/Activity/profile.dart';
-import 'package:tugas_kelompok/provider/Switch.dart';
-import 'package:tugas_kelompok/provider/obscure.dart';
 import 'package:provider/provider.dart';
 
 class MyHome2 extends StatefulWidget {
