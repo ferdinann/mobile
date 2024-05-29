@@ -28,6 +28,7 @@ class _MyHome2State extends State<MyHome2> {
     MySnbt()
   ];
   var selectedDDB = null;
+  bool isBannerVisible = true;
 
   @override
   void initState() {
@@ -215,92 +216,126 @@ class _MyHome2State extends State<MyHome2> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: ListView(children: [
-          if (Search.searchClick) ...[
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 4.0,
-              children: filteredData.map((item) {
-                return Chip(
-                  label: Text(item),
-                  onDeleted: () {
+      body: Column(
+        children: [
+          if (isBannerVisible)
+            MaterialBanner(
+              content: Text(
+                  'Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.'),
+              backgroundColor: Colors.yellow[100],
+              actions: [
+                TextButton(
+                  onPressed: () {
                     setState(() {
-                      filteredData.remove(item);
+                      isBannerVisible = false;
                     });
                   },
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 20),
-          ],
-          const Padding(
-            padding: EdgeInsets.only(bottom: 30, left: 10),
-            child: Text(
-              'LiteBrain',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.blueAccent),
-            ),
-          ),
-          const Text(
-              'Persiapkan dirimu dari sekarang. Dimulai dari belajar skill yang dibutuhkan oleh startup dan industri saat ini. Yuk,tingkatkan skillmu sekarang juga.'),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                DropdownButton(
-                  value: selectedDDB,
-                  hint: const Text("Product"),
-                  items: const [
-                    DropdownMenuItem(
-                      value: "Pemrograman",
-                      child: Text(
-                        'Pemrograman',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Data science',
-                      child: Text(
-                        'Data science',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Cyber security',
-                      child: Text(
-                        'Cyber security',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'SNBT',
-                      child: Text(
-                        'SNBT',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      selectedDDB = value!;
-                    });
+                  child: Text('Dismiss'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MyCourse()),
+                    );
                   },
+                  child: Text('See Course'),
                 ),
               ],
             ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: ListView(
+                children: [
+                  if (Search.searchClick) ...[
+                    Wrap(
+                      spacing: 8.0,
+                      runSpacing: 4.0,
+                      children: filteredData.map((item) {
+                        return Chip(
+                          label: Text(item),
+                          onDeleted: () {
+                            setState(() {
+                              filteredData.remove(item);
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 30, left: 10),
+                    child: Text(
+                      'LiteBrain',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.blueAccent),
+                    ),
+                  ),
+                  const Text(
+                    'Persiapkan dirimu dari sekarang. Dimulai dari belajar skill yang dibutuhkan oleh startup dan industri saat ini. Yuk, tingkatkan skillmu sekarang juga.',
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        DropdownButton(
+                          value: selectedDDB,
+                          hint: const Text("Product"),
+                          items: const [
+                            DropdownMenuItem(
+                              value: "Pemrograman",
+                              child: Text(
+                                'Pemrograman',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Data science',
+                              child: Text(
+                                'Data science',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: 'Cyber security',
+                              child: Text(
+                                'Cyber security',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: 'SNBT',
+                              child: Text(
+                                'SNBT',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              selectedDDB = value!;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  selectedDDB == null
+                      ? dropDown[0]
+                      : selectedDDB == "Data science"
+                          ? dropDown[2]
+                          : selectedDDB == "Cyber security"
+                              ? dropDown[1]
+                              : selectedDDB == "Pemrograman"
+                                  ? dropDown[3]
+                                  : dropDown[4],
+                ],
+              ),
+            ),
           ),
-          selectedDDB == null
-              ? dropDown[0]
-              : selectedDDB == "Data science"
-                  ? dropDown[2]
-                  : selectedDDB == "Cyber security"
-                      ? dropDown[1]
-                      : selectedDDB == "Pemrograman"
-                          ? dropDown[3]
-                          : dropDown[4],
-        ]),
+        ],
       ),
     );
   }
