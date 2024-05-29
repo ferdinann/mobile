@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kelompok_oal/Activity/aboutus.dart';
+import 'package:kelompok_oal/Activity/community.dart';
+import 'package:kelompok_oal/Activity/course.dart';
+import 'package:kelompok_oal/Activity/dropDown.dart';
+import 'package:kelompok_oal/Activity/elearning.dart';
+import 'package:kelompok_oal/Activity/profile.dart';
+import 'package:kelompok_oal/provider/Switch.dart';
+import 'package:kelompok_oal/provider/obscure.dart';
 import 'package:tugas_kelompok/Activity/aboutus.dart';
 import 'package:tugas_kelompok/Activity/community.dart';
 import 'package:tugas_kelompok/Activity/course.dart';
@@ -72,7 +80,8 @@ class _MyHome2State extends State<MyHome2> {
                   title: Text(
                     'About Us',
                     style: TextStyle(
-                      color: DarkMode.enableDarkMode ? Colors.white : Colors.black,
+                      color:
+                          DarkMode.enableDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                   onTap: () {
@@ -91,7 +100,9 @@ class _MyHome2State extends State<MyHome2> {
                     Text(
                       'Dark Mode',
                       style: TextStyle(
-                        color: DarkMode.enableDarkMode ? Colors.white : Colors.black,
+                        color: DarkMode.enableDarkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                     Spacer(),
@@ -109,7 +120,8 @@ class _MyHome2State extends State<MyHome2> {
                   title: Text(
                     'Logout',
                     style: TextStyle(
-                      color: DarkMode.enableDarkMode ? Colors.white : Colors.black,
+                      color:
+                          DarkMode.enableDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                   onTap: () {
@@ -215,12 +227,8 @@ class _MyHome2State extends State<MyHome2> {
         children: [
           if (isBannerVisible)
             MaterialBanner(
-<<<<<<< HEAD
               content: Text(
                   'Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.'),
-=======
-              content: Text('Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.'),
->>>>>>> 55f34ce4e429de539564b66f107eac6ed870ac20
               backgroundColor: Colors.yellow[100],
               actions: [
                 TextButton(
