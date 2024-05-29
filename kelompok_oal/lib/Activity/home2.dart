@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kelompok_oal/Activity/aboutus.dart';
-import 'package:kelompok_oal/Activity/community.dart';
-import 'package:kelompok_oal/Activity/course.dart';
-import 'package:kelompok_oal/Activity/dropDown.dart';
-import 'package:kelompok_oal/Activity/elearning.dart';
-import 'package:kelompok_oal/Activity/profile.dart';
-import 'package:kelompok_oal/provider/Switch.dart';
-import 'package:kelompok_oal/provider/obscure.dart';
+import 'package:tugas_kelompok/Activity/aboutus.dart';
+import 'package:tugas_kelompok/Activity/community.dart';
+import 'package:tugas_kelompok/Activity/course.dart';
+import 'package:tugas_kelompok/Activity/dropDown.dart';
+import 'package:tugas_kelompok/Activity/elearning.dart';
+import 'package:tugas_kelompok/Activity/profile.dart';
+import 'package:tugas_kelompok/provider/Switch.dart';
+import 'package:tugas_kelompok/provider/obscure.dart';
 import 'package:provider/provider.dart';
 
 class MyHome2 extends StatefulWidget {
@@ -56,95 +56,88 @@ class _MyHome2State extends State<MyHome2> {
     var DarkMode = Provider.of<Mode>(context);
     return Scaffold(
       appBar: AppBar(
-          elevation: 8,
-          shadowColor: Colors.grey,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Provider.of<serchClick>(context, listen: false)
-                      .toogleVisible();
-                },
-                icon: Icon(Search.searchClick ? Icons.close : Icons.search)),
-            PopupMenuButton(
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  child: ListTile(
-                    title: Text(
-                      'About Us',
+        elevation: 8,
+        shadowColor: Colors.grey,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Provider.of<serchClick>(context, listen: false).toogleVisible();
+            },
+            icon: Icon(Search.searchClick ? Icons.close : Icons.search),
+          ),
+          PopupMenuButton(
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: ListTile(
+                  title: Text(
+                    'About Us',
+                    style: TextStyle(
+                      color: DarkMode.enableDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutUsPage(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                child: Row(
+                  children: [
+                    Text(
+                      'Dark Mode',
                       style: TextStyle(
-                        color: DarkMode.enableDarkMode
-                            ? Colors.white
-                            : Colors.black,
+                        color: DarkMode.enableDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AboutUsPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Text(
-                        'Dark Mode',
-                        style: TextStyle(
-                          color: DarkMode.enableDarkMode
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                      Spacer(),
-                      Switch(
-                        value: DarkMode.enableDarkMode,
-                        onChanged: (value) {
-                          DarkMode.enableDarkMode = value;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  child: ListTile(
-                    title: Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: DarkMode.enableDarkMode
-                            ? Colors.white
-                            : Colors.black,
-                      ),
+                    Spacer(),
+                    Switch(
+                      value: DarkMode.enableDarkMode,
+                      onChanged: (value) {
+                        DarkMode.enableDarkMode = value;
+                      },
                     ),
-                    onTap: () {
-                      Navigator.popUntil(context, (route) => route.isFirst);
-                    },
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-          title: Search.searchClick
-              ? Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    //color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: TextField(
-                    //style: TextStyle(color: Colors.black),
-                    controller: _serchBar,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(bottom: 10, left: 15),
-                      hintText: "Search...",
-                      //hintStyle: TextStyle(color: Colors.black)
+              ),
+              PopupMenuItem(
+                child: ListTile(
+                  title: Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: DarkMode.enableDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
-                )
-              : Text('LiteBrain')),
+                  onTap: () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+        title: Search.searchClick
+            ? Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: TextField(
+                  controller: _serchBar,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(bottom: 10, left: 15),
+                    hintText: "Search...",
+                  ),
+                  onChanged: updateSearchResults,
+                ),
+              )
+            : Text('LiteBrain'),
+      ),
       drawer: Drawer(
         child: Column(
           children: [
@@ -153,14 +146,16 @@ class _MyHome2State extends State<MyHome2> {
                 accountName: Text("Ferdinan"),
                 accountEmail: Text("ferdinantag8@gmail.com"),
                 currentAccountPicture: CircleAvatar(
-                    child: Container(
-                        height: 90,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/profile.jpeg'),
-                          ),
-                        ))),
+                  child: Container(
+                    height: 90,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('assets/profile.jpeg'),
+                      ),
+                    ),
+                  ),
+                ),
                 decoration: BoxDecoration(color: Colors.blue),
               ),
               onTap: () {
@@ -220,8 +215,12 @@ class _MyHome2State extends State<MyHome2> {
         children: [
           if (isBannerVisible)
             MaterialBanner(
+<<<<<<< HEAD
               content: Text(
                   'Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.'),
+=======
+              content: Text('Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.'),
+>>>>>>> 55f34ce4e429de539564b66f107eac6ed870ac20
               backgroundColor: Colors.yellow[100],
               actions: [
                 TextButton(
