@@ -34,6 +34,18 @@ class _MyHome2State extends State<MyHome2> {
   void initState() {
     super.initState();
     filteredData = data;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content:
+            Text("Anda dapat bergabung dalam kelas pelajaran secara Gratis"),
+        action: SnackBarAction(
+          label: "Oke",
+          onPressed: () {},
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 
   void updateSearchResults(String query) {
@@ -48,6 +60,33 @@ class _MyHome2State extends State<MyHome2> {
             .toList();
       });
     }
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Konfirmasi Logout"),
+          content: Text("Apakah Anda yakin ingin keluar dari aplikasi?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Batal"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.popUntil(context, (route) => route.isFirst);
+              },
+              child: Text("Logout"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -117,7 +156,7 @@ class _MyHome2State extends State<MyHome2> {
                     ),
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    _showLogoutConfirmationDialog(context);
                   },
                 ),
               ),
