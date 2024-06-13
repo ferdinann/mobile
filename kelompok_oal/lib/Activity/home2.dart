@@ -194,7 +194,7 @@ class _MyHome2State extends State<MyHome2> {
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: AssetImage('assets/profile.jpeg'),
+                        image: AssetImage('assets/images/profile.jpeg'),
                       ),
                     ),
                   ),

@@ -12,21 +12,29 @@ class _MyButtonState extends State<MyButton> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(16.0),
-        child: const Column(
+        child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
-                leading: Icon(Icons.share),
-                title: Text("Share"),
-              ),
+                  leading: Icon(Icons.share),
+                  title: Text("Share"),
+                  onTap: () {
+                    Navigator.pop(context);
+                  }),
               ListTile(
                 leading: Icon(Icons.download),
                 title: Text("Download"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
               ),
               ListTile(
                 leading: Icon(Icons.open_in_full),
                 title: Text("Open"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
               ),
             ]));
   }

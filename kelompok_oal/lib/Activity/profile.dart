@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kelompok_oal/Activity/home.dart';
 import 'package:kelompok_oal/Activity/myButton.dart';
 import 'package:kelompok_oal/Activity/test.dart';
@@ -376,7 +377,7 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 5, right: 5),
               child: Card(
                 color: Colors.white,
                 shadowColor: Colors.yellow[600],
@@ -393,7 +394,29 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
                       ),
                       Text(
                         'Data Analis',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Sertifikat Course',
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Selamat! Kamu sudah menyelesaikan materi ini, klik untuk mendapatkan sertifkatmu!',
+                              style: TextStyle(color: Colors.black),
+                            )),
                       ),
                       SizedBox(height: 10),
                       // Tampilkan bar persentase jalan belajar
@@ -415,10 +438,10 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
             Row(
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 150, left: 240),
+                    padding: const EdgeInsets.only(top: 260, left: 250),
                     child: SizedBox(
-                      height: 50,
-                      width: 40,
+                      height: 55,
+                      width: 45,
                       child: Image(
                         image: AssetImage('assets/images/completed.jpeg'),
                         fit: BoxFit.cover,
@@ -436,7 +459,7 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 5, right: 5),
               child: Card(
                 color: Colors.white,
                 shadowColor: Colors.yellow[600],
@@ -453,7 +476,29 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
                       ),
                       Text(
                         'Web Developer',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(7.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Sertifikat Course',
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Selamat! Kamu sudah menyelesaikan materi ini, klik untuk mendapatkan sertifkatmu!',
+                              style: TextStyle(color: Colors.black),
+                            )),
                       ),
                       SizedBox(height: 10),
                       // Tampilkan bar persentase jalan belajar
@@ -475,10 +520,10 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
             Row(
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 150, left: 240),
+                    padding: const EdgeInsets.only(top: 260, left: 250),
                     child: SizedBox(
-                        height: 50,
-                        width: 40,
+                        height: 55,
+                        width: 45,
                         child: Image(
                           image: AssetImage('assets/images/completed.jpeg'),
                           fit: BoxFit.cover,
