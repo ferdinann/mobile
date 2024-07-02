@@ -13,7 +13,7 @@ class Mynotif extends StatefulWidget {
 class _MynotifState extends State<Mynotif> {
   void markAllAsRead() {
     setState(() {
-      baca = true; // Ubah nilai `baca` menjadi true
+      baca = true;
       Provider.of<notifProvider>(context, listen: false).markAllAsRead();
     });
   }
@@ -70,7 +70,7 @@ class _MynotifState extends State<Mynotif> {
           var item = prov.data['data']![index];
           return Slidable(
             endActionPane: ActionPane(
-                extentRatio: 1 / 5,
+                extentRatio: 1 / 4,
                 motion: ScrollMotion(),
                 children: [
                   SlidableAction(

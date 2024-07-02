@@ -25,9 +25,8 @@ class _MyLearningState extends State<MyLearning> {
                   MaterialPageRoute(builder: (context) => MyProfile()));
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 100, right: 100),
+              padding: const EdgeInsets.only(left: 40, right: 40),
               child: const Card(
-                color: Colors.white,
                 shadowColor: Colors.grey,
                 margin: EdgeInsets.all(20),
                 child: Center(
@@ -41,7 +40,6 @@ class _MyLearningState extends State<MyLearning> {
                       ),
                       Text(
                         'Data Science',
-                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),
@@ -55,9 +53,8 @@ class _MyLearningState extends State<MyLearning> {
                   context, MaterialPageRoute(builder: (context) => MyHome()));
             },
             child: Padding(
-              padding: const EdgeInsets.only(left: 100, right: 100),
+              padding: const EdgeInsets.only(left: 40, right: 40),
               child: Card(
-                color: Colors.white,
                 shadowColor: Colors.grey,
                 margin: EdgeInsets.all(20),
                 child: Center(
@@ -71,7 +68,6 @@ class _MyLearningState extends State<MyLearning> {
                       ),
                       Text(
                         'Mobile Developer',
-                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),

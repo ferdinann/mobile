@@ -33,7 +33,6 @@ class _MyCourseState extends State<MyCourse> {
             child: Padding(
               padding: const EdgeInsets.only(left: 40, right: 40),
               child: Card(
-                color: Colors.white,
                 shadowColor: Colors.grey,
                 margin: EdgeInsets.all(20),
                 child: Center(
@@ -47,7 +46,6 @@ class _MyCourseState extends State<MyCourse> {
                       ),
                       Text(
                         'Data Science',
-                        style: TextStyle(color: Colors.black),
                       ),
                       SizedBox(height: 10),
                       // Tampilkan bar persentase jalan belajar
@@ -59,7 +57,6 @@ class _MyCourseState extends State<MyCourse> {
                       SizedBox(height: 5),
                       Text(
                         '${learningProgress['Data Science']}% Complete',
-                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),
@@ -75,7 +72,6 @@ class _MyCourseState extends State<MyCourse> {
             child: Padding(
               padding: const EdgeInsets.only(left: 40, right: 40),
               child: Card(
-                color: Colors.white,
                 shadowColor: Colors.grey,
                 margin: EdgeInsets.all(20),
                 child: Center(
@@ -89,7 +85,6 @@ class _MyCourseState extends State<MyCourse> {
                       ),
                       Text(
                         'Mobile Developer',
-                        style: TextStyle(color: Colors.black),
                       ),
                       SizedBox(height: 10),
                       // Tampilkan bar persentase jalan belajar
@@ -101,7 +96,6 @@ class _MyCourseState extends State<MyCourse> {
                       SizedBox(height: 5),
                       Text(
                         '${learningProgress['Mobile Developer']}% Complete',
-                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),

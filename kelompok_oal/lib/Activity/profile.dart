@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kelompok_oal/Activity/home.dart';
 import 'package:kelompok_oal/Activity/myButton.dart';
 import 'package:kelompok_oal/Activity/test.dart';
@@ -275,7 +274,6 @@ class _MyCourseProgresState extends State<MyCourseProgres> {
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Card(
-            color: Colors.white,
             shadowColor: Colors.grey,
             margin: EdgeInsets.all(20),
             child: Center(
@@ -289,7 +287,6 @@ class _MyCourseProgresState extends State<MyCourseProgres> {
                   ),
                   Text(
                     'Data Science',
-                    style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(height: 10),
                   // Tampilkan bar persentase jalan belajar
@@ -301,7 +298,6 @@ class _MyCourseProgresState extends State<MyCourseProgres> {
                   SizedBox(height: 5),
                   Text(
                     '${learningProgress['Data Science']}% Complete',
-                    style: TextStyle(color: Colors.black),
                   ),
                 ],
               ),
@@ -317,7 +313,6 @@ class _MyCourseProgresState extends State<MyCourseProgres> {
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Card(
-            color: Colors.white,
             shadowColor: Colors.grey,
             margin: EdgeInsets.all(20),
             child: Center(
@@ -331,7 +326,6 @@ class _MyCourseProgresState extends State<MyCourseProgres> {
                   ),
                   Text(
                     'Mobile Developer',
-                    style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(height: 10),
                   // Tampilkan bar persentase jalan belajar
@@ -343,7 +337,6 @@ class _MyCourseProgresState extends State<MyCourseProgres> {
                   SizedBox(height: 5),
                   Text(
                     '${learningProgress['Mobile Developer']}% Complete',
-                    style: TextStyle(color: Colors.black),
                   ),
                 ],
               ),
@@ -369,171 +362,177 @@ class _MyCourseCompletedState extends State<MyCourseCompleted> {
   };
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      InkWell(
-        onTap: () {
-          _showMyButtonSheet(context);
-        },
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Card(
-                color: Colors.white,
-                shadowColor: Colors.yellow[600],
-                elevation: 10,
-                margin: EdgeInsets.all(20),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('assets/images/data_analis.png'),
-                        height: 130,
-                        width: 200,
-                      ),
-                      Text(
-                        'Data Analis',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Sertifikat Course',
-                            style: TextStyle(color: Colors.blue, fontSize: 17),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Selamat! Kamu sudah menyelesaikan materi ini, klik untuk mendapatkan sertifkatmu!',
-                              style: TextStyle(color: Colors.black),
-                            )),
-                      ),
-                      SizedBox(height: 10),
-                      // Tampilkan bar persentase jalan belajar
-                      LinearProgressIndicator(
-                        value: learningProgress['Data Analis']! / 100,
-                        backgroundColor: Colors.grey[300],
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        '${learningProgress['Data Analis']}% Completed',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Row(
+    return ListView(
+      children: [
+        Container(
+          height: 1100,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 260, left: 250),
-                    child: SizedBox(
-                      height: 55,
-                      width: 45,
-                      child: Image(
-                        image: AssetImage('assets/images/completed.jpeg'),
-                        fit: BoxFit.cover,
-                      ),
-                    )),
-              ],
-            ),
-          ],
-        ),
-      ),
-      GestureDetector(
-        onTap: () {
-          _showMyButtonSheet(context);
-        },
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5, right: 5),
-              child: Card(
-                color: Colors.white,
-                shadowColor: Colors.yellow[600],
-                elevation: 10,
-                margin: EdgeInsets.all(20),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('assets/images/web.jpeg'),
-                        height: 130,
-                        width: 200,
-                      ),
-                      Text(
-                        'Web Developer',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Sertifikat Course',
-                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  child: Card(
+                    shadowColor: Colors.yellow[600],
+                    elevation: 10,
+                    margin: EdgeInsets.all(20),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/data_analis.png'),
+                            height: 130,
+                            width: 200,
                           ),
-                        ),
+                          Text(
+                            'Data Analis',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Sertifikat Course',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 17),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Selamat! Kamu sudah menyelesaikan materi ini, tetap semangat belajar skill baru lebih banyak lagi di LiteBrain',
+                                )),
+                          ),
+                          SizedBox(height: 10),
+                          // Tampilkan bar persentase jalan belajar
+                          LinearProgressIndicator(
+                            value: learningProgress['Data Analis']! / 100,
+                            backgroundColor: Colors.grey[300],
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.blue),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            '${learningProgress['Data Analis']}% Completed',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Icon(
+                                    Icons.thumb_up,
+                                    size: 30,
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      _showMyButtonSheet(context);
+                                    },
+                                    icon: Icon(
+                                      Icons.share,
+                                      size: 30,
+                                    ))
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Selamat! Kamu sudah menyelesaikan materi ini, klik untuk mendapatkan sertifkatmu!',
-                              style: TextStyle(color: Colors.black),
-                            )),
-                      ),
-                      SizedBox(height: 10),
-                      // Tampilkan bar persentase jalan belajar
-                      LinearProgressIndicator(
-                        value: learningProgress['Web Developer']! / 100,
-                        backgroundColor: Colors.grey[300],
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        '${learningProgress['Web Developer']}% Completed',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Row(
-              children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 260, left: 250),
-                    child: SizedBox(
-                        height: 55,
-                        width: 45,
-                        child: Image(
-                          image: AssetImage('assets/images/completed.jpeg'),
-                          fit: BoxFit.cover,
-                        ))),
-              ],
-            ),
-          ],
+                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  child: Card(
+                    shadowColor: Colors.yellow[600],
+                    elevation: 10,
+                    margin: EdgeInsets.all(20),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/web.jpeg'),
+                            height: 130,
+                            width: 200,
+                          ),
+                          Text(
+                            'Web Developer',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Sertifikat Course',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 17),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Selamat! Kamu sudah menyelesaikan materi ini, tetap semangat belajar skill baru lebih banyak lagi di LiteBrain',
+                                )),
+                          ),
+                          SizedBox(height: 10),
+                          LinearProgressIndicator(
+                            value: learningProgress['Web Developer']! / 100,
+                            backgroundColor: Colors.grey[300],
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.blue),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            '${learningProgress['Web Developer']}% Completed',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: Icon(
+                                    Icons.thumb_up,
+                                    size: 30,
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      _showMyButtonSheet(context);
+                                    },
+                                    icon: Icon(
+                                      Icons.share,
+                                      size: 30,
+                                    ))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   void _showMyButtonSheet(BuildContext context) {
