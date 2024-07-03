@@ -88,8 +88,8 @@ class _MyCommunityState extends State<MyCommunity> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final snackBar = SnackBar(
         behavior: SnackBarBehavior.floating,
-        content: Text(
-            "Selamat! Anda telah bergabung dengan komunitas sesuai dengan minat dan bakat Anda. Selamat Belajar!!"),
+        content:
+            Text("Anda telah bergabung dengan komunitas. Selamat Belajar!!"),
         action: SnackBarAction(
           label: "",
           onPressed: () {},

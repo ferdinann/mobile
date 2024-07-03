@@ -47,18 +47,7 @@ class _MyHome2State extends State<MyHome2> {
   void initState() {
     super.initState();
     filteredData = data;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final snackBar = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: const Text(
-            "Anda dapat bergabung dalam kelas pelajaran secara Gratis"),
-        action: SnackBarAction(
-          label: "Oke",
-          onPressed: () {},
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   void updateSearchResults(String query) {
@@ -122,34 +111,34 @@ class _MyHome2State extends State<MyHome2> {
                 icon: Icon(Search.searchClick ? Icons.close : Icons.search),
               ),
               PopupMenuButton(
+                onSelected: (value) {
+                  if (value == 'about_us') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutUsPage(),
+                      ),
+                    );
+                  } else if (value == 'dark_mode') {
+                    DarkMode.enableDarkMode = !DarkMode.enableDarkMode;
+                  } else if (value == 'logout') {
+                    _showLogoutConfirmationDialog(context);
+                  }
+                },
                 itemBuilder: (context) => [
                   PopupMenuItem(
-                    child: ListTile(
-                      title: Text(
-                        'About Us',
-                        style: TextStyle(
-                          color: DarkMode.enableDarkMode
-                              ? Colors.white
-                              : Colors.black,
-                        ),
+                    value: 'about_us',
+                    child: Text(
+                      'About Us',
+                      style: TextStyle(
+                        color: DarkMode.enableDarkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
-                      onTap: () {
-                        Provider.of<LoadingProvider>(context, listen: false)
-                            .setLoading(true);
-                        Future.delayed(const Duration(seconds: 2), () {
-                          Provider.of<LoadingProvider>(context, listen: false)
-                              .setLoading(false);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AboutUsPage(),
-                            ),
-                          );
-                        });
-                      },
                     ),
                   ),
                   PopupMenuItem(
+                    value: 'dark_mode',
                     child: Row(
                       children: [
                         Text(
@@ -164,25 +153,23 @@ class _MyHome2State extends State<MyHome2> {
                         Switch(
                           value: DarkMode.enableDarkMode,
                           onChanged: (value) {
-                            DarkMode.enableDarkMode = value;
+                            setState(() {
+                              DarkMode.enableDarkMode = value;
+                            });
                           },
                         ),
                       ],
                     ),
                   ),
                   PopupMenuItem(
-                    child: ListTile(
-                      title: Text(
-                        'Logout',
-                        style: TextStyle(
-                          color: DarkMode.enableDarkMode
-                              ? Colors.white
-                              : Colors.black,
-                        ),
+                    value: 'logout',
+                    child: Text(
+                      'Logout',
+                      style: TextStyle(
+                        color: DarkMode.enableDarkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
-                      onTap: () {
-                        _showLogoutConfirmationDialog(context);
-                      },
                     ),
                   ),
                 ],
@@ -288,7 +275,9 @@ class _MyHome2State extends State<MyHome2> {
               if (isBannerVisible)
                 MaterialBanner(
                   content: const Text(
-                      'Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.'),
+                    'Selamat Datang Kembali! Ayo, Lanjutkan Proses Belajar!.',
+                    style: TextStyle(color: Colors.black),
+                  ),
                   backgroundColor: Colors.yellow[100],
                   actions: [
                     TextButton(
@@ -297,7 +286,10 @@ class _MyHome2State extends State<MyHome2> {
                           isBannerVisible = false;
                         });
                       },
-                      child: const Text('Dismiss'),
+                      child: const Text(
+                        'Dismiss',
+                        style: TextStyle(color: Colors.blue),
+                      ),
                     ),
                     TextButton(
                       onPressed: () {
@@ -307,7 +299,8 @@ class _MyHome2State extends State<MyHome2> {
                               builder: (context) => const MyCourse()),
                         );
                       },
-                      child: const Text('See Course'),
+                      child: const Text('See Course',
+                          style: TextStyle(color: Colors.blue)),
                     ),
                   ],
                 ),

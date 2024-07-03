@@ -153,7 +153,7 @@ class MyHomePage extends StatelessWidget {
           imagePath: 'assets/images/web.jpeg',
           title: 'Web Developer',
           information:
-              'pengembangan web untuk membuat situs web dan aplikasi web....',
+              'Pengembangan web untuk membuat situs web dan aplikasi web....',
           showDiscount: true,
         ),
         CustomCard(
@@ -174,7 +174,7 @@ class MyHomePage extends StatelessWidget {
           imagePath: 'assets/images/digital.jpeg',
           title: 'Digital Marketing',
           information:
-              'strategi pemasaran digital untuk mempromosikan produk dan layanan secara online....',
+              'Strategi pemasaran digital untuk mempromosikan produk dan layanan secara online....',
           showDiscount: true,
         ),
       ],
@@ -203,59 +203,79 @@ class CustomCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       elevation: 5,
-      margin: EdgeInsets.all(15),
+      margin: EdgeInsets.all(20),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-            child: Image(
-              image: AssetImage(imagePath),
-              width: double.infinity,
-              height: 150,
-              fit: BoxFit.cover,
-            ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+                child: Image(
+                  image: AssetImage(imagePath),
+                  width: double.infinity,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                  color: Colors.black54,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
                 Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    //color: Colors.black87,
-                  ),
-                ),
-                SizedBox(height: 5.0),
-                Text(
                   information,
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  style: TextStyle(fontSize: 14),
                 ),
                 if (showDiscount) ...[
                   SizedBox(height: 10),
-                  Card(
-                    color: Color.fromARGB(255, 215, 177, 240),
-                    margin: EdgeInsets.only(top: 5),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'DAFTAR SEKARANG & DAPATKAN DISKON KHUSUS',
-                          style: TextStyle(color: Colors.white, fontSize: 11),
-                          textAlign: TextAlign.center,
-                        ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.purple, Colors.deepPurpleAccent],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: Text(
+                      'DAFTAR SEKARANG & DAPATKAN DISKON KHUSUS',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Icon(Icons.calendar_today, color: Colors.grey),
+                      Icon(Icons.calendar_today, color: Colors.grey[700]),
                       SizedBox(width: 5),
                       Text(
                         '7 Agustus 2024 - 19 September 2024',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -263,22 +283,22 @@ class CustomCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.price_change, color: Colors.red),
-                      SizedBox(width: 5),
                       Text(
                         'Rp 700.000',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Colors.red,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
                       SizedBox(width: 10),
-                      Icon(Icons.price_check, color: Colors.green),
-                      SizedBox(width: 5),
                       Text(
                         'Rp 250.000',
-                        style: TextStyle(fontSize: 14, color: Colors.green),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),

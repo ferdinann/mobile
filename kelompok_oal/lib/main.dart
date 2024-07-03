@@ -4,6 +4,7 @@ import 'package:kelompok_oal/provider/QuizProvider.dart';
 import 'package:kelompok_oal/provider/Quizchek.dart';
 import 'package:kelompok_oal/provider/Switch.dart';
 import 'package:kelompok_oal/provider/bottonN.dart';
+import 'package:kelompok_oal/provider/learning_provider.dart';
 import 'package:kelompok_oal/provider/loading_provider.dart';
 import 'package:kelompok_oal/provider/notifProvider.dart';
 import 'package:kelompok_oal/provider/obscure.dart';
@@ -19,7 +20,8 @@ void main() {
       ChangeNotifierProvider(create: (_) => BottonNavigation()),
       ChangeNotifierProvider(create: (_) => Mode()),
       ChangeNotifierProvider(create: (_) => notifProvider()),
-      ChangeNotifierProvider(create: (_) => LoadingProvider())
+      ChangeNotifierProvider(create: (_) => LoadingProvider()),
+      ChangeNotifierProvider(create: (_) => LearningProvider())
     ],
     child: const MainApp(),
   ));
