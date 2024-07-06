@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:typed_data';
 
 class InterestSelection extends StatefulWidget {
   const InterestSelection({super.key});
@@ -62,7 +64,6 @@ class _InterestSelectionState extends State<InterestSelection> {
   }
 }
 
-// MyCommunity Widget
 class MyCommunity extends StatefulWidget {
   final List<String> selectedInterests;
 
@@ -82,6 +83,8 @@ class _MyCommunityState extends State<MyCommunity> {
     "Python": "assets/images/python.jpeg"
   };
 
+  final List<Map<String, dynamic>> createdCommunities = [];
+
   @override
   void initState() {
     super.initState();
@@ -99,6 +102,12 @@ class _MyCommunityState extends State<MyCommunity> {
     });
   }
 
+  void _addCommunity(String name, Uint8List imageBytes) {
+    setState(() {
+      createdCommunities.add({"name": name, "image": imageBytes});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,38 +115,141 @@ class _MyCommunityState extends State<MyCommunity> {
       body: Stack(
         children: [
           ListView.builder(
-            itemCount: widget.selectedInterests.length,
+            itemCount:
+                widget.selectedInterests.length + createdCommunities.length,
             itemBuilder: (context, index) {
-              final interest = widget.selectedInterests[index];
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        communityImages[interest] ?? "assets/placeholder.png",
-                        width: 50,
-                        height: 50,
-                      ),
-                      SizedBox(width: 16.0),
-                      Text(interest),
-                    ],
+              if (index < widget.selectedInterests.length) {
+                final interest = widget.selectedInterests[index];
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          communityImages[interest] ?? "assets/placeholder.png",
+                          width: 50,
+                          height: 50,
+                        ),
+                        SizedBox(width: 16.0),
+                        Text(interest),
+                      ],
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                final community =
+                    createdCommunities[index - widget.selectedInterests.length];
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Image.memory(
+                          community["image"],
+                          width: 50,
+                          height: 50,
+                        ),
+                        SizedBox(width: 16.0),
+                        Text(community["name"]),
+                      ],
+                    ),
+                  ),
+                );
+              }
             },
           ),
           Positioned(
             bottom: 20,
             right: 20,
             child: FloatingActionButton.extended(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                final newCommunity = await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyProgram()),
+                  MaterialPageRoute(builder: (context) => CreateCommunity()),
                 );
+                if (newCommunity != null) {
+                  _addCommunity(newCommunity['name'], newCommunity['image']);
+                }
               },
               label: Text("CREATE"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CreateCommunity extends StatefulWidget {
+  @override
+  State<CreateCommunity> createState() => _CreateCommunityState();
+}
+
+class _CreateCommunityState extends State<CreateCommunity> {
+  final ImagePicker _picker = ImagePicker();
+  Uint8List? _imageBytes;
+  final TextEditingController _nameController = TextEditingController();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final bytes = await pickedFile.readAsBytes();
+      setState(() {
+        _imageBytes = bytes;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Create Community')),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(labelText: 'Community Name'),
+                ),
+                SizedBox(height: 20),
+                _imageBytes != null
+                    ? Image.memory(_imageBytes!)
+                    : Container(
+                        height: 200,
+                        width: double.infinity,
+                        child: Center(
+                          child: Text("Images belum dipilih!!"),
+                        ),
+                        // child: Placeholder(
+                        //     fallbackHeight: 200.0, fallbackWidth: double.infinity),
+                      ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _pickImage,
+                  child: Text("Pick Image"),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_imageBytes != null &&
+                        _nameController.text.isNotEmpty) {
+                      Navigator.pop(context, {
+                        'name': _nameController.text,
+                        'image': _imageBytes!,
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Please enter a name and pick an image."),
+                      ));
+                    }
+                  },
+                  child: Text("CREATE COMMUNITY"),
+                ),
+              ],
             ),
           ),
         ],
