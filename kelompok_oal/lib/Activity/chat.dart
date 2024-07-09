@@ -12,13 +12,12 @@ class _MychatState extends State<Mychat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Message"),
+        title: const Text("Message"),
         elevation: 5,
       ),
       body: ListView.builder(
-        itemCount: 15, // Jumlah pesan dalam daftar
+        itemCount: 15,
         itemBuilder: (BuildContext context, int index) {
-          // Contoh data pesan
           String sender = index.isEven ? 'John' : 'Jenny';
           String message = 'Hello, this is message number $index';
           bool isMe = index.isEven; // Jika pesan dari saya
@@ -30,7 +29,7 @@ class _MychatState extends State<Mychat> {
             ),
             title: Text(sender),
             subtitle: Text(message),
-            trailing: Text(
+            trailing: const Text(
               '10:00', // Waktu pengiriman pesan
               style: TextStyle(color: Colors.grey),
             ),

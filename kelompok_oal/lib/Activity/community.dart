@@ -36,7 +36,7 @@ class _InterestSelectionState extends State<InterestSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pilih Minat dan Bakat')),
+      appBar: AppBar(title: const Text('Pilih Minat dan Bakat')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -52,10 +52,10 @@ class _InterestSelectionState extends State<InterestSelection> {
                 },
               );
             }).toList(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _submitSelections,
-              child: Text("SUBMIT"),
+              child: const Text("SUBMIT"),
             ),
           ],
         ),
@@ -90,9 +90,10 @@ class _MyCommunityState extends State<MyCommunity> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final snackBar = SnackBar(
+        duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         content:
-            Text("Anda telah bergabung dengan komunitas. Selamat Belajar!!"),
+            const Text("Anda telah bergabung dengan komunitas. Selamat Belajar!!"),
         action: SnackBarAction(
           label: "",
           onPressed: () {},
@@ -111,7 +112,7 @@ class _MyCommunityState extends State<MyCommunity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Community')),
+      appBar: AppBar(title: const Text('Community')),
       body: Stack(
         children: [
           ListView.builder(
@@ -130,7 +131,7 @@ class _MyCommunityState extends State<MyCommunity> {
                           width: 50,
                           height: 50,
                         ),
-                        SizedBox(width: 16.0),
+                        const SizedBox(width: 16.0),
                         Text(interest),
                       ],
                     ),
@@ -149,7 +150,7 @@ class _MyCommunityState extends State<MyCommunity> {
                           width: 50,
                           height: 50,
                         ),
-                        SizedBox(width: 16.0),
+                        const SizedBox(width: 16.0),
                         Text(community["name"]),
                       ],
                     ),
@@ -171,7 +172,7 @@ class _MyCommunityState extends State<MyCommunity> {
                   _addCommunity(newCommunity['name'], newCommunity['image']);
                 }
               },
-              label: Text("CREATE"),
+              label: const Text("CREATE"),
             ),
           ),
         ],
@@ -204,7 +205,7 @@ class _CreateCommunityState extends State<CreateCommunity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create Community')),
+      appBar: AppBar(title: const Text('Create Community')),
       body: ListView(
         children: [
           Padding(
@@ -213,9 +214,9 @@ class _CreateCommunityState extends State<CreateCommunity> {
               children: [
                 TextField(
                   controller: _nameController,
-                  decoration: InputDecoration(labelText: 'Community Name'),
+                  decoration: const InputDecoration(labelText: 'Community Name'),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _imageBytes != null
                     ? Image.memory(_imageBytes!)
                     : Container(

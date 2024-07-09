@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
 import 'package:kelompok_oal/Activity/home.dart';
 import 'package:kelompok_oal/Activity/myButton.dart';
 import 'package:kelompok_oal/Activity/test.dart';
@@ -13,6 +15,27 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  Uint8List? _imageBytes;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final bytes = await pickedFile.readAsBytes();
+      setState(() {
+        _imageBytes = bytes;
+      });
+    } else {
+      print('No image selected.');
+    }
+  }
+
+  @override
+  void initState() {
+    _imageBytes = null; // No initial image selected
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,33 +46,57 @@ class _MyProfileState extends State<MyProfile> {
           children: [
             Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 15, left: 15),
-                          height: 100,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/profile.jpeg'))),
+                GestureDetector(
+                  onTap: _pickImage,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Stack(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.only(top: 15, left: 15),
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: _imageBytes != null
+                                        ? MemoryImage(_imageBytes!)
+                                        : AssetImage(
+                                                'assets/images/profile.jpeg')
+                                            as ImageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Expanded(
+                                flex: 6,
+                                child: Text(
+                                  'Ferdinan',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                )),
+                          ],
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Expanded(
-                          flex: 6,
-                          child: Text(
-                            'Ferdinan',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 25),
-                          )),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 83, horizontal: 80),
+                          child: Icon(
+                            Icons.edit,
+                            size: 40,
+                            color: Colors.blue[900],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -73,7 +120,8 @@ class _MyProfileDataState extends State<MyProfileData> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:
+              const EdgeInsets.only(bottom: 16, right: 16, left: 16, top: 0),
           child: TextField(
             controller: TextEditingController(text: 'Ferdinanta Ginting'),
             decoration: InputDecoration(

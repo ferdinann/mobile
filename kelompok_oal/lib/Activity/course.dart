@@ -10,10 +10,9 @@ class MyCourse extends StatefulWidget {
 }
 
 class _MyCourseState extends State<MyCourse> {
-  // Simpan persentase progress belajar untuk setiap materi
   Map<String, double> learningProgress = {
-    'Data Science': 50.0, // contoh progress belajar untuk Data Science
-    'Mobile Developer': 30.0, // contoh progress belajar untuk Mobile Developer
+    'Data Science': 50.0,
+    'Mobile Developer': 30.0,
   };
 
   // Simpan deadline untuk setiap materi
@@ -69,7 +68,6 @@ class _MyCourseState extends State<MyCourse> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Courses'),
-        //backgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

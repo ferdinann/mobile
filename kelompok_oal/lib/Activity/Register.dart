@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:kelompok_oal/Activity/login.dart';
 
 class RegisterPage extends StatelessWidget {
-  RegisterPage({super.key});
+  RegisterPage({Key? key});
 
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -23,40 +20,8 @@ class RegisterPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Username
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  labelText: 'Username',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // First Name
-              TextField(
-                controller: _firstNameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  labelText: 'First Name',
-                  prefixIcon: Icon(Icons.person_outline),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // Last Name
-              TextField(
-                controller: _lastNameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  labelText: 'Last Name',
-                  prefixIcon: Icon(Icons.person_outline),
-                ),
-              ),
-              const SizedBox(height: 16),
               // Email Address
               TextField(
                 controller: _emailController,
@@ -99,9 +64,18 @@ class RegisterPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => MyLogin()),
                   );
-                  // Implement registration logic
                 },
                 child: const Text('Register'),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyLogin()),
+                  );
+                },
+                child: const Text('Already have an account? Log in'),
               ),
             ],
           ),
